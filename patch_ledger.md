@@ -1,5 +1,5 @@
 # DEFECT & PATCH LEDGER (DPL)
-**Session Run:** 2026-09-18 | **Framework:** ACPHF V8.0
+**Session Run:** 2026-09-18 | **Framework:** ACPHF V8.0 
 
 ### ENTRY 1: Terminal MFA Claim Drop & Role Assignment Failure
 *   **Error:** `RequestDisallowedByAzure` 401 on ARM REST API Role Assignment.
