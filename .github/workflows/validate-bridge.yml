@@ -1,0 +1,26 @@
+name: Zero-Trust Bridge Validation (OIDC)
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  id-token: write # Mandatory for OIDC token request
+  contents: read
+
+jobs:
+  validate-data-plane:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Azure Login via OIDC
+        uses: azure/login@v2
+        with:
+          client-id: e83ffd2e-2f4d-4948-bf98-d23bef37eac0
+          tenant-id: 9439dd25-f3b5-4829-a76f-5ede8cd54c3c
+          subscription-id: d5ffd8a5-d994-4eb5-b87c-4442054d233e
+
+      - name: Verify Key Vault Data-Plane Access
+        run: |
+          echo "[*] Polling Key Vault for secrets to prove data-plane authorization..."
+          az keyvault secret list --vault-name "kv-efm-test-lab-04" --query "[].id" -o tsv
+          echo "[+] Data-Plane Access Confirmed."
